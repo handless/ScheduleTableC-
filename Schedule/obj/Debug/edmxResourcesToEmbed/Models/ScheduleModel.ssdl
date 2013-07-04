@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ScheduleModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ScheduleModelStoreContainer">
+    <EntitySet Name="Students" EntityType="ScheduleModel.Store.Students" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groups" EntityType="ScheduleModel.Store.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Subjects" EntityType="ScheduleModel.Store.Subjects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Teachers" EntityType="ScheduleModel.Store.Teachers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupSubject" EntityType="ScheduleModel.Store.GroupSubject" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="StudentGroup" Association="ScheduleModel.Store.StudentGroup">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupSubject_Group" Association="ScheduleModel.Store.FK_GroupSubject_Group">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="GroupSubject" EntitySet="GroupSubject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupSubject_Subject" Association="ScheduleModel.Store.FK_GroupSubject_Subject">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="GroupSubject" EntitySet="GroupSubject" />
+    </AssociationSet>
+    <AssociationSet Name="TeacherSubject" Association="ScheduleModel.Store.TeacherSubject">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Subject" EntitySet="Subjects" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Hours" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GroupSubject">
+    <Key>
+      <PropertyRef Name="Group_Id" />
+      <PropertyRef Name="Subject_Id" />
+    </Key>
+    <Property Name="Group_Id" Type="int" Nullable="false" />
+    <Property Name="Subject_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="StudentGroup">
+    <End Role="Student" Type="ScheduleModel.Store.Students" Multiplicity="*" />
+    <End Role="Group" Type="ScheduleModel.Store.Groups" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeacherSubject">
+    <End Role="Teacher" Type="ScheduleModel.Store.Teachers" Multiplicity="1" />
+    <End Role="Subject" Type="ScheduleModel.Store.Subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subject">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupSubject_Group">
+    <End Role="Group" Type="ScheduleModel.Store.Groups" Multiplicity="1" />
+    <End Role="GroupSubject" Type="ScheduleModel.Store.GroupSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupSubject">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupSubject_Subject">
+    <End Role="GroupSubject" Type="ScheduleModel.Store.GroupSubject" Multiplicity="*" />
+    <End Role="Subject" Type="ScheduleModel.Store.Subjects" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupSubject">
+        <PropertyRef Name="Subject_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

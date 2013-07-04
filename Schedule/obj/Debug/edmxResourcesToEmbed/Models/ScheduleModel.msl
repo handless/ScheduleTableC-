@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ScheduleModelStoreContainer" CdmEntityContainer="ScheduleModelContainer">
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Student)">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Group)">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subjects">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Subject)">
+        <MappingFragment StoreEntitySet="Subjects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teachers">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Teacher)">
+        <MappingFragment StoreEntitySet="Teachers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="GroupSubject" TypeName="ScheduleModel.GroupSubject" StoreEntitySet="GroupSubject">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+      <EndProperty Name="Subject">
+        <ScalarProperty Name="Id" ColumnName="Subject_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

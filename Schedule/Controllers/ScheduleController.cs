@@ -12,7 +12,9 @@ namespace Schedule.Controllers
     {
         //
         // GET: /Schedule/
-        
+
+        ScheduleModelContainer container = new ScheduleModelContainer();
+
 
         public ActionResult Index()
         {
@@ -37,17 +39,29 @@ namespace Schedule.Controllers
             //mysbj[4].SubjectId = 5;
             ///**/
 
-            Group myGroup = new Group();
-            Student myStudent = new Student();
-            myGroup.AddGroup("Hoy", 1);
-            myGroup.AddGroup("motg", 2);
-            myGroup.AddGroup("sda", 3);
-            myStudent.AddStudent("Sasha", "hand", 1);
-            myStudent.AddStudent("Alex","asd",2);
-            myStudent.AddStudent("Petya","sad",1);
-            ViewBag.Test2 = myStudent.ShowStudentsName();
-            ViewBag.Test = myGroup.ShowGroupName();
-           
+            //Group myGroup = new Group();
+            //Student myStudent = new Student();
+            //myGroup.AddGroup("Hoy", 1);
+            //myGroup.AddGroup("motg", 2);
+            //myGroup.AddGroup("sda", 3);
+            //myStudent.AddStudent("Sasha", "hand", 1);
+            //myStudent.AddStudent("Alex","asd",2);
+            //myStudent.AddStudent("Petya","sad",1);
+            //ViewBag.Test2 = myStudent.ShowStudentsName();
+            //ViewBag.Test = myGroup.ShowGroupName();
+
+            var prepods = container.Teachers.Where(t => t.Hours > 666);
+
+            var subjects = container.Subjects.Where(s => s.Teacher.FirstName == "Olga");
+
+            Teacher tt = new Teacher
+            {
+                FirstName = "Olga",
+                LastName = "Prila",
+                Subject = container.Subjects.ToList(),
+            };
+            container.Teachers.Add(tt);
+            container.SaveChanges();
             return View();
         }
 

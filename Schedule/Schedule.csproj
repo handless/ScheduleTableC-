@@ -48,6 +48,8 @@
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Selectors" />
     <Reference Include="System.identitymodel.services" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -132,16 +134,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataBase.cs" />
-    <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\Groups.cs" />
-    <Compile Include="Models\IDataBase.cs" />
-    <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\Students.cs" />
-    <Compile Include="Models\Subject.cs" />
-    <Compile Include="Models\Subjects.cs" />
-    <Compile Include="Models\Teacher.cs" />
-    <Compile Include="Models\Teachers.cs" />
+    <Compile Include="Models\Group.cs">
+      <DependentUpon>ScheduleData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScheduleData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScheduleData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScheduleModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Student.cs">
+      <DependentUpon>ScheduleData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Subject.cs">
+      <DependentUpon>ScheduleData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Teacher.cs">
+      <DependentUpon>ScheduleData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +220,24 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <EntityDeploy Include="Models\ScheduleModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ScheduleModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ScheduleModel.edmx.diagram">
+      <DependentUpon>ScheduleModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ScheduleModel.edmx.sql" />
+    <Content Include="Models\ScheduleData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ScheduleData.Context.cs</LastGenOutput>
+      <DependentUpon>ScheduleModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ScheduleData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ScheduleData.cs</LastGenOutput>
+      <DependentUpon>ScheduleModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -233,9 +270,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Roles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
