@@ -54,6 +54,5 @@ C:\Users\handless\Documents\GitHub\ScheduleTableC-\Schedule\bin\System.Web.Razor
 C:\Users\handless\Documents\GitHub\ScheduleTableC-\Schedule\bin\System.Web.WebPages.xml
 C:\Users\handless\Documents\GitHub\ScheduleTableC-\Schedule\bin\System.Web.WebPages.Deployment.xml
 C:\Users\handless\Documents\GitHub\ScheduleTableC-\Schedule\bin\System.Web.WebPages.Razor.xml
-C:\Users\handless\Documents\GitHub\ScheduleTableC-\Schedule\obj\Debug\Schedule.csprojResolveAssemblyReference.cache
 C:\Users\handless\Documents\GitHub\ScheduleTableC-\Schedule\obj\Debug\Schedule.dll
 C:\Users\handless\Documents\GitHub\ScheduleTableC-\Schedule\obj\Debug\Schedule.pdb

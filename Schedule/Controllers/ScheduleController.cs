@@ -21,12 +21,12 @@ namespace Schedule.Controllers
  
             var prepods = container.Teachers.Where(t => t.Hours > 666);
 
-            var subjects = container.Subjects.Where(s => s.Teacher.FirstName == "Olga");
+            var subjects = container.Subjects.Where(s => s.Teacher.FirstName == "Vorobei");
 
             Teacher tt = new Teacher
             {
-                FirstName = "Olga",
-                LastName = "Prila",
+                FirstName = "Yuriy",
+                LastName = "Vorobei",
                 Subject = container.Subjects.ToList(),
             };
             container.Teachers.Add(tt);
