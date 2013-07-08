@@ -5,7 +5,7 @@
 }
 
 <h2>Register</h2>
-
+@section content {
 @using (Html.BeginForm()) { 
     @Html.ValidationSummary(true)
 
@@ -53,3 +53,4 @@
         </p>
         </fieldset>
 }
+    }

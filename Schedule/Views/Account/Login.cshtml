@@ -4,6 +4,7 @@
 }
 
 <h2>Login</h2>
+@section content {
 @using (Html.BeginForm()) {
         @Html.ValidationSummary(true)
 
@@ -40,4 +41,5 @@
                 <input type="submit" value="Login"
            </p>
             </fieldset>
+    }
     }

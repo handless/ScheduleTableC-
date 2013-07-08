@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -230,6 +231,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ScheduleModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\classy_fabric.png" />
     <Content Include="Models\ScheduleModel.edmx.diagram">
       <DependentUpon>ScheduleModel.edmx</DependentUpon>
     </Content>
@@ -275,6 +277,12 @@
     <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\TeacherAdd.cshtml" />
+    <Content Include="Views\Admin\SubjectAdd.cshtml" />
+    <Content Include="Views\Admin\StudentAdd.cshtml" />
+    <Content Include="Views\Admin\GroupAdd.cshtml" />
+    <Content Include="Views\Shared\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Roles\" />

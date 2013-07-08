@@ -1,13 +1,4 @@
-﻿body {
-    font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
-}
-
-header, footer, nav, section {
-    display: block;
-}
+﻿
 
 
 /* Styles for basic forms
@@ -58,4 +49,114 @@ textarea {
 
 .validation-summary-valid {
     display: none;
+}
+*{
+	margin: 0 auto;
+	padding: 0;
+   
+}
+body{
+	background-image: url("../Images/classy_fabric.png");
+	background-repeat: repeat; 
+
+}
+.site {
+	margin:0 auto;
+	width:1000px;
+	height: 1600px;
+	
+}
+#header {
+	-moz-box-shadow:    0px 3px 10px 0px  #000000;
+	-webkit-box-shadow:  0px 3px 10px 0px  #000000;
+	box-shadow:			 0px 3px 10px 0px  #000000;
+	width: 1000px;
+	height: 200px;
+}
+#logo{
+	width: 1000px;
+	height: 150px;
+	background: #262c28;
+	font-size: 3em;
+	text-align: center;
+}
+
+#content {
+	background: #87978c;
+	height: 1350px;
+	width: 1000px;
+	-moz-box-shadow:    0px 3px 10px 0px  #000000;
+	-webkit-box-shadow:  0px 3px 10px 0px  #000000;
+	box-shadow:			 0px 3px 10px 0px  #000000;
+}
+footer {
+	
+	-moz-box-shadow:   0px 4px 10px 0px  #000000;
+	-webkit-box-shadow:  0px 4px 10px 0px  #000000;
+	box-shadow:			 0px 4px 10px 0px  #000000;
+	width: 1000px;
+	height: 50px;
+	background: #55625a;
+	font-size: 0.7em;
+	text-align: center;
+}
+#menu_itc {
+ font-size: 0.85em;
+ height:3.7em; 
+ color: #b3bdb6;
+ text-align:center;
+ background-color: #262c28; 
+}
+#LogIn 
+{
+    color: #b3bdb6;
+    background-color: #262c28;
+    font-size: 0.40em;
+    top:100px;
+    left:1000px;
+}
+    #LogIn a
+    {
+        color: #b3bdb6;
+    background-color: #262c28;
+    }
+#menu_itc div {
+ width:44em; 
+ margin: auto;
+}
+#menu_itc a {
+ display:block; 
+ float:left; 
+ color: #b3bdb6;
+ background-color: #262c28;
+ text-align:center; 
+ padding: 10px 18px;
+ text-decoration: none;
+}
+#menu_itc a:hover {
+ color: #dee3e0;	
+ background-color: #262c28;
+ border-top: 4px solid #2f3732;
+ padding: 6px 18px 8px 18px;
+}
+
+
+#ladingTitleImage0, #ladingTitleImage1, #ladingTitleImage2 {
+position: absolute;
+top: 150px;
+left: 1000px;
+width: 90px;
+height: 90px;
+border: 2px solid #fff;
+cursor: pointer;
+-o-border-radius: 7px;
+-moz-border-radius: 7px;
+-webkit-border-radius: 7px;
+-khtml-border-radius: 7px;
+border-radius: 7px;
+-o-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+-khtml-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+box-shadow: 0 2px 2px rgba(0,0,0,0.3);
 }

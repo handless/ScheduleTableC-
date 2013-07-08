@@ -8,7 +8,43 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @RenderBody()
+     <div id="header">
+            <div id="logo">
+                <br>
+			Schedule Table
+                <div id="LogIn">
+                <section id="login">
+                       @Html.Partial("Login")
+                </section>
+                </div>
+		    </div>
+		
+         <div id="menu_itc">
+ 				<div>
+                    
+                    @Html.ActionLink("Home","Index","Home")
+                    @Html.ActionLink("Register","Register","Account")
+                    @Html.ActionLink("Log In","LogIn","Account")
+                    
+                  
+  				</div>
+			</div> 
+
+          <div id="content">
+            @RenderSection("featured", required: false)
+               @RenderBody()
+            @RenderSection("content", required: false)
+        </div>
+           <!--<div id="ladingTitleImage0" style="background-image: url(/Images/classy_fabric.png);"></div>-->
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>
+
+   
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)

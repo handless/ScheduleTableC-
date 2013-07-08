@@ -3,5 +3,8 @@
 }
 
 <h2>Schedule Index</h2>
-@ViewBag.Test
-@ViewBag.Test2 
+
+@foreach (var prep in ViewBag.prepods)
+{ 
+    <li>@prep.FirstName</li>
+}
