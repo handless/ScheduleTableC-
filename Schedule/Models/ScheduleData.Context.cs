@@ -29,5 +29,6 @@ namespace Schedule.Models
         public DbSet<Group> Groups { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Day> DaySet { get; set; }
     }
 }

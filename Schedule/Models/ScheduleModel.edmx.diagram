@@ -12,6 +12,8 @@
         <AssociationConnector Association="ScheduleModel.StudentGroup" />
         <AssociationConnector Association="ScheduleModel.GroupSubject" />
         <AssociationConnector Association="ScheduleModel.TeacherSubject" />
+        <EntityTypeShape EntityType="ScheduleModel.Day" Width="1.5" PointX="9.5" PointY="3.625" />
+        <AssociationConnector Association="ScheduleModel.DaySubject" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

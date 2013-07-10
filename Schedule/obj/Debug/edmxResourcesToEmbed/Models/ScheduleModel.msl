@@ -25,6 +25,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DayId" ColumnName="DayId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -35,6 +36,14 @@
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Hours" ColumnName="Hours" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DaySet">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Day)">
+        <MappingFragment StoreEntitySet="DaySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DayName" ColumnName="DayName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

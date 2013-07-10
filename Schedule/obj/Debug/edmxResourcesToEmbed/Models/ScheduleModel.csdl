@@ -17,6 +17,11 @@
       <End Role="Teacher" EntitySet="Teachers" />
       <End Role="Subject" EntitySet="Subjects" />
     </AssociationSet>
+    <EntitySet Name="DaySet" EntityType="ScheduleModel.Day" />
+    <AssociationSet Name="DaySubject" Association="ScheduleModel.DaySubject">
+      <End Role="Day" EntitySet="DaySet" />
+      <End Role="Subject" EntitySet="Subjects" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Student">
     <Key>
@@ -46,6 +51,8 @@
     <NavigationProperty Name="Teacher" Relationship="ScheduleModel.TeacherSubject" FromRole="Subject" ToRole="Teacher" />
     <Property Type="Int32" Name="TeacherId" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" />
+    <NavigationProperty Name="Day" Relationship="ScheduleModel.DaySubject" FromRole="Subject" ToRole="Day" />
+    <Property Type="Int32" Name="DayId" Nullable="false" />
   </EntityType>
   <EntityType Name="Teacher">
     <Key>
@@ -82,6 +89,26 @@
       </Principal>
       <Dependent Role="Subject">
         <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Day">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Subject" Relationship="ScheduleModel.DaySubject" FromRole="Day" ToRole="Subject" />
+    <Property Type="String" Name="DayName" Nullable="false" />
+  </EntityType>
+  <Association Name="DaySubject">
+    <End Type="ScheduleModel.Day" Role="Day" Multiplicity="1" />
+    <End Type="ScheduleModel.Subject" Role="Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Day">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subject">
+        <PropertyRef Name="DayId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

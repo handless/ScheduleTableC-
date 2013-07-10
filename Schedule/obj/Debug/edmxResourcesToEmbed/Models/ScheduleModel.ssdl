@@ -5,6 +5,7 @@
     <EntitySet Name="Groups" EntityType="ScheduleModel.Store.Groups" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Subjects" EntityType="ScheduleModel.Store.Subjects" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Teachers" EntityType="ScheduleModel.Store.Teachers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DaySet" EntityType="ScheduleModel.Store.DaySet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GroupSubject" EntityType="ScheduleModel.Store.GroupSubject" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="StudentGroup" Association="ScheduleModel.Store.StudentGroup">
       <End Role="Student" EntitySet="Students" />
@@ -20,6 +21,10 @@
     </AssociationSet>
     <AssociationSet Name="TeacherSubject" Association="ScheduleModel.Store.TeacherSubject">
       <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Subject" EntitySet="Subjects" />
+    </AssociationSet>
+    <AssociationSet Name="DaySubject" Association="ScheduleModel.Store.DaySubject">
+      <End Role="Day" EntitySet="DaySet" />
       <End Role="Subject" EntitySet="Subjects" />
     </AssociationSet>
   </EntityContainer>
@@ -46,6 +51,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TeacherId" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DayId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Teachers">
     <Key>
@@ -55,6 +61,13 @@
     <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Hours" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DaySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DayName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="GroupSubject">
     <Key>
@@ -85,6 +98,18 @@
       </Principal>
       <Dependent Role="Subject">
         <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DaySubject">
+    <End Role="Day" Type="ScheduleModel.Store.DaySet" Multiplicity="1" />
+    <End Role="Subject" Type="ScheduleModel.Store.Subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Day">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subject">
+        <PropertyRef Name="DayId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

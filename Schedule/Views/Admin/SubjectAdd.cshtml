@@ -6,5 +6,16 @@
 <form action="SubjectAddSubmit" method="post">
 <p>  SubjectName      :   <input type="text" name="SubjectName"/></p>
 <p>TeachersFirstName : <input type="text" name="TeachersFirstName"/></p>
+<p>Day               : <input type="text" name="Day"/></p>
+
+<p>
+    @Html.Label("Monday")
+@Html.CheckBox("Monday");
+    <br>
+@Html.Label("Thuesday")
+@Html.CheckBox("Thuesday");
+</p>
 <p>     <input type="submit" value="Add"/></p>
 </form>
+
+@ViewBag.TestValue

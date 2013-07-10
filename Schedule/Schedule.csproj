@@ -136,6 +136,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Day.cs">
+      <DependentUpon>ScheduleData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Group.cs">
       <DependentUpon>ScheduleData.tt</DependentUpon>
     </Compile>
@@ -283,6 +286,8 @@
     <Content Include="Views\Admin\StudentAdd.cshtml" />
     <Content Include="Views\Admin\GroupAdd.cshtml" />
     <Content Include="Views\Shared\Login.cshtml" />
+    <Content Include="Views\Admin\GroupAndSubjectAdd.cshtml" />
+    <Content Include="Views\Admin\SubjectAddSubmit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Roles\" />
