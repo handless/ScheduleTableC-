@@ -6,6 +6,7 @@
         <MappingFragment StoreEntitySet="LessonSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

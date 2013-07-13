@@ -21,6 +21,7 @@ namespace Schedule.Models
     
         public int Id { get; set; }
         public int TeacherId { get; set; }
+        public string SubjectName { get; set; }
     
         public virtual Classroom Classroom { get; set; }
         public virtual Day Day { get; set; }

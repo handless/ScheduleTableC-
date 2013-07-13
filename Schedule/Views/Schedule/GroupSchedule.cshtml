@@ -8,8 +8,33 @@
 
 @ViewBag.Group.Dequeue().Name
 
-@ViewBag.Group.Dequeue().Name
+<table>
+    <tr>
+@* @for (int i = 0; i< 3; i++)
+ {
+            <td>@ViewBag.Teachers.Dequeue().FirstName;</td>
+          <td>  @ViewBag.ClassRooms.Dequeue().Name;</td>
+          <td>  @ViewBag.SubjectNames.Dequeue();</td>
+ }*@
+   </tr> </table>
+@*<br>
+ @ViewBag.Teachers.Dequeue().FirstName
+ @ViewBag.ClassRooms.Dequeue().Name
+ @ViewBag.SubjectNames.Dequeue()
+<br>
+ @ViewBag.Teachers.Dequeue().FirstName
+ @ViewBag.ClassRooms.Dequeue().Name
+ @ViewBag.SubjectNames.Dequeue()
 
+<br>
+ @ViewBag.Teachers.Dequeue().FirstName
+ @ViewBag.ClassRooms.Dequeue().Name
+ @ViewBag.SubjectNames.Dequeue()*@
+
+@*@foreach (var item in @ViewBag.test)
+{
+    @item.SubjectName
+}*@
 
 <div>
 <table>
@@ -28,19 +53,20 @@
                 Преподователь
             </td>
         </tr>
-        <tr>
-            <td>Математика</td>
-            <td>5</td>
-            <td>Пинчук</td>
-        </tr>
-        <tr>
-            <td>ООП</td>
-            <td>4</td>
-            <td>Василька</td>
-        </tr>
-        </table></td><tr>
+        @{int HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @for (int i = 0; i <= HowMuch; i++)
+        {
+            <tr>
+                <td>@ViewBag.SubjectNames.Dequeue()</td>
+            <td>@ViewBag.ClassRooms.Dequeue().Name</td>
+            <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+            </tr>
+            
+        }
+        </table></td>
+
 <tr>
-     <td>Вторник</td>
+     <td>Вторник </td>
     <td>
     <table>
         <tr>
@@ -54,20 +80,122 @@
                 Преподователь
             </td>
         </tr>
-        <tr>
-            <td>Укр.яз</td>
-            <td>15</td>
-            <td>Сыроква</td>
-        </tr>
-        <tr>
-            <td>Физика</td>
-            <td>43</td>
-            <td>Васыч</td>
-        </tr>
+        @{HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @for (int i = 0; i <= HowMuch; i++)
+        {
+            <tr>
+                  @if (@ViewBag.SubjectNames.Count > 0)
+                {
+                    <td>@ViewBag.SubjectNames.Dequeue()</td>
+            <td>@ViewBag.ClassRooms.Dequeue().Name</td>
+            <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+                    
+                }
+            </tr>
+            
+        }
         </table></td>
 
 </tr>    
-       
+
+<tr>
+     <td>Среда </td>
+    <td>
+    <table>
+        <tr>
+            <td>
+                Предмет
+            </td>
+            <td>
+               Аудитория
+            </td>
+            <td>
+                Преподователь
+            </td>
+        </tr>
+        @{HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @for (int i = 0; i <= HowMuch; i++)
+        {
+            <tr>
+                @if (@ViewBag.SubjectNames.Count > 0)
+                {
+                    <td>@ViewBag.SubjectNames.Dequeue()</td>
+            <td>@ViewBag.ClassRooms.Dequeue().Name</td>
+            <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+                    
+                }
+            </tr>
+            
+        }
+        </table></td>
+
+</tr>    
+       <tr>
+     <td>Четверг </td>
+    <td>
+    <table>
+        <tr>
+            <td>
+                Предмет
+            </td>
+            <td>
+               Аудитория
+            </td>
+            <td>
+                Преподователь
+            </td>
+        </tr>
+        @{HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @for (int i = 0; i <= HowMuch; i++)
+        {
+            <tr>
+                @if (@ViewBag.SubjectNames.Count > 0)
+                {
+                    <td>@ViewBag.SubjectNames.Dequeue()</td>
+            <td>@ViewBag.ClassRooms.Dequeue().Name</td>
+            <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+                    
+                }
+                
+            </tr>
+            
+        }
+        </table></td>
+
+</tr>    
+    <tr>
+     <td>Пятница </td>
+    <td>
+    <table>
+        <tr>
+            <td>
+                Предмет
+            </td>
+            <td>
+               Аудитория
+            </td>
+            <td>
+                Преподователь
+            </td>
+        </tr>
+        @{HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @for (int i = 0; i <= HowMuch; i++)
+        {
+            <tr>
+                  @if (@ViewBag.SubjectNames.Count > 0)
+                {
+                    <td>@ViewBag.SubjectNames.Dequeue()</td>
+            <td>@ViewBag.ClassRooms.Dequeue().Name</td>
+            <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+                    
+                }
+            </tr>
+            
+        }
+        </table></td>
+
+</tr>    
+
             
     </table>
 </div>

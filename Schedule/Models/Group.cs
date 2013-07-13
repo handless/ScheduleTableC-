@@ -11,7 +11,6 @@ namespace Schedule.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Group
     {
@@ -22,9 +21,6 @@ namespace Schedule.Models
         }
     
         public int Id { get; set; }
-
-        [Required]
-        [Display(Name = "Name")]
         public string Name { get; set; }
     
         public virtual ICollection<Lesson> Lesson { get; set; }

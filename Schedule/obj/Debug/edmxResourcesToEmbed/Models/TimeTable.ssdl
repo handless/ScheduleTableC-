@@ -54,6 +54,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TeacherId" Type="int" Nullable="false" />
+    <Property Name="SubjectName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Classroom_Id" Type="int" Nullable="false" />
     <Property Name="Day_Id" Type="int" Nullable="false" />
     <Property Name="Time_Id" Type="int" Nullable="false" />

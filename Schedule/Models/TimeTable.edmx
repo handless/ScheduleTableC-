@@ -59,6 +59,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TeacherId" Type="int" Nullable="false" />
+    <Property Name="SubjectName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Classroom_Id" Type="int" Nullable="false" />
     <Property Name="Day_Id" Type="int" Nullable="false" />
     <Property Name="Time_Id" Type="int" Nullable="false" />
@@ -292,6 +293,7 @@
           <NavigationProperty Name="Group" Relationship="TimeTable.LessonGroup" FromRole="Lesson" ToRole="Group" />
           <NavigationProperty Name="Teacher" Relationship="TimeTable.TeacherLesson" FromRole="Lesson" ToRole="Teacher" />
           <Property Type="Int32" Name="TeacherId" Nullable="false" />
+          <Property Type="String" Name="SubjectName" Nullable="false" />
         </EntityType>
         <EntityType Name="Classroom">
           <Key>
@@ -409,6 +411,7 @@
         <MappingFragment StoreEntitySet="LessonSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/12/2013 16:33:09
+-- Date Created: 07/13/2013 14:28:06
 -- Generated from EDMX file: C:\Users\handless\Documents\GitHub\ScheduleTableC-\Schedule\Models\TimeTable.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,71 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_LessonClassroom]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LessonSet] DROP CONSTRAINT [FK_LessonClassroom];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LessonDay]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LessonSet] DROP CONSTRAINT [FK_LessonDay];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LessonTime]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LessonSet] DROP CONSTRAINT [FK_LessonTime];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LessonGroup_Lesson]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LessonGroup] DROP CONSTRAINT [FK_LessonGroup_Lesson];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LessonGroup_Group]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LessonGroup] DROP CONSTRAINT [FK_LessonGroup_Group];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TeacherLesson]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LessonSet] DROP CONSTRAINT [FK_TeacherLesson];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GroupStudent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentSet] DROP CONSTRAINT [FK_GroupStudent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TeacherSubject_Teacher]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TeacherSubject] DROP CONSTRAINT [FK_TeacherSubject_Teacher];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TeacherSubject_Subject]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TeacherSubject] DROP CONSTRAINT [FK_TeacherSubject_Subject];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SubjectLesson]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SubjectSet] DROP CONSTRAINT [FK_SubjectLesson];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[LessonSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LessonSet];
+GO
+IF OBJECT_ID(N'[dbo].[ClassroomSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClassroomSet];
+GO
+IF OBJECT_ID(N'[dbo].[TimeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TimeSet];
+GO
+IF OBJECT_ID(N'[dbo].[GroupSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GroupSet];
+GO
+IF OBJECT_ID(N'[dbo].[TeacherSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TeacherSet];
+GO
+IF OBJECT_ID(N'[dbo].[DaySet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DaySet];
+GO
+IF OBJECT_ID(N'[dbo].[StudentSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StudentSet];
+GO
+IF OBJECT_ID(N'[dbo].[SubjectSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SubjectSet];
+GO
+IF OBJECT_ID(N'[dbo].[LessonGroup]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LessonGroup];
+GO
+IF OBJECT_ID(N'[dbo].[TeacherSubject]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TeacherSubject];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -31,6 +91,7 @@ GO
 CREATE TABLE [dbo].[LessonSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [TeacherId] int  NOT NULL,
+    [SubjectName] nvarchar(max)  NOT NULL,
     [Classroom_Id] int  NOT NULL,
     [Day_Id] int  NOT NULL,
     [Time_Id] int  NOT NULL
