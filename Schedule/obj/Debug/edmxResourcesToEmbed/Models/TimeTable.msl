@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TimeTableStoreContainer" CdmEntityContainer="TimeTableContainer">
+    <EntitySetMapping Name="LessonSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Lesson)">
+        <MappingFragment StoreEntitySet="LessonSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassroomSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Classroom)">
+        <MappingFragment StoreEntitySet="ClassroomSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Time)">
+        <MappingFragment StoreEntitySet="TimeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="InTime" ColumnName="InTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Group)">
+        <MappingFragment StoreEntitySet="GroupSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeacherSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Teacher)">
+        <MappingFragment StoreEntitySet="TeacherSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DaySet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Day)">
+        <MappingFragment StoreEntitySet="DaySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Student)">
+        <MappingFragment StoreEntitySet="StudentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubjectSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Subject)">
+        <MappingFragment StoreEntitySet="SubjectSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LessonClassroom" TypeName="TimeTable.LessonClassroom" StoreEntitySet="LessonSet">
+      <EndProperty Name="Classroom">
+        <ScalarProperty Name="Id" ColumnName="Classroom_Id" />
+      </EndProperty>
+      <EndProperty Name="Lesson">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LessonDay" TypeName="TimeTable.LessonDay" StoreEntitySet="LessonSet">
+      <EndProperty Name="Day">
+        <ScalarProperty Name="Id" ColumnName="Day_Id" />
+      </EndProperty>
+      <EndProperty Name="Lesson">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LessonTime" TypeName="TimeTable.LessonTime" StoreEntitySet="LessonSet">
+      <EndProperty Name="Time">
+        <ScalarProperty Name="Id" ColumnName="Time_Id" />
+      </EndProperty>
+      <EndProperty Name="Lesson">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LessonGroup" TypeName="TimeTable.LessonGroup" StoreEntitySet="LessonGroup">
+      <EndProperty Name="Lesson">
+        <ScalarProperty Name="Id" ColumnName="Lesson_Id" />
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TeacherSubject" TypeName="TimeTable.TeacherSubject" StoreEntitySet="TeacherSubject">
+      <EndProperty Name="Teacher">
+        <ScalarProperty Name="Id" ColumnName="Teacher_Id" />
+      </EndProperty>
+      <EndProperty Name="Subject">
+        <ScalarProperty Name="Id" ColumnName="Subject_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -12,16 +12,11 @@ namespace Schedule.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Subject
+    public partial class Time
     {
-        public Subject()
-        {
-            this.Teacher = new HashSet<Teacher>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
+        public System.DateTime InTime { get; set; }
     
-        public virtual ICollection<Teacher> Teacher { get; set; }
+        public virtual Lesson Lesson { get; set; }
     }
 }

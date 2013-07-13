@@ -4,16 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7c6e3e7573604829aadb703c151c494d" Name="Diagram1" >
-        <EntityTypeShape EntityType="ScheduleModel.Student" Width="1.5" PointX="3.625" PointY="0.5" />
-        <EntityTypeShape EntityType="ScheduleModel.Group" Width="1.5" PointX="5.75" PointY="0.5" />
-        <EntityTypeShape EntityType="ScheduleModel.Subject" Width="1.5" PointX="8.125" PointY="0.5" />
-        <EntityTypeShape EntityType="ScheduleModel.Teacher" Width="1.5" PointX="6.25" PointY="2.625" />
-        <AssociationConnector Association="ScheduleModel.StudentGroup" />
-        <AssociationConnector Association="ScheduleModel.GroupSubject" />
-        <AssociationConnector Association="ScheduleModel.TeacherSubject" />
-        <EntityTypeShape EntityType="ScheduleModel.Day" Width="1.5" PointX="9.5" PointY="3.625" />
-        <AssociationConnector Association="ScheduleModel.DaySubject" />
+      <Diagram DiagramId="7c6e3e7573604829aadb703c151c494d" Name="Diagram1" ZoomLevel="74" >
+        <EntityTypeShape EntityType="ScheduleModel.Para" Width="1.5" PointX="4.75" PointY="0.5" />
+        <EntityTypeShape EntityType="ScheduleModel.Auditoria" Width="1.5" PointX="7.375" PointY="0.5" />
+        <EntityTypeShape EntityType="ScheduleModel.Time" Width="1.5" PointX="7.375" PointY="2.25" />
+        <EntityTypeShape EntityType="ScheduleModel.Group" Width="1.5" PointX="5.375" PointY="3.875" />
+        <EntityTypeShape EntityType="ScheduleModel.Prepod" Width="1.5" PointX="3.25" PointY="3.625" />
+        <EntityTypeShape EntityType="ScheduleModel.Den" Width="1.5" PointX="2.5" PointY="0.5" />
+        <EntityTypeShape EntityType="ScheduleModel.Predmet" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="ScheduleModel.Student" Width="1.5" PointX="7.625" PointY="4.25" />
+        <AssociationConnector Association="ScheduleModel.ParaAuditoria" />
+        <AssociationConnector Association="ScheduleModel.ParaTime" />
+        <AssociationConnector Association="ScheduleModel.ParaGroup" />
+        <AssociationConnector Association="ScheduleModel.PrepodPara" />
+        <AssociationConnector Association="ScheduleModel.ParaDen" />
+        <AssociationConnector Association="ScheduleModel.GroupStudent" />
+        <AssociationConnector Association="ScheduleModel.PredmetPrepod" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

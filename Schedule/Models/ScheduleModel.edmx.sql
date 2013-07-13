@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/08/2013 15:24:40
+-- Date Created: 07/12/2013 13:17:35
 -- Generated from EDMX file: C:\Users\handless\Documents\GitHub\ScheduleTableC-\Schedule\Models\ScheduleModel.edmx
 -- --------------------------------------------------
 
@@ -17,94 +17,80 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_StudentGroup]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Students] DROP CONSTRAINT [FK_StudentGroup];
-GO
-IF OBJECT_ID(N'[dbo].[FK_GroupSubject_Group]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GroupSubject] DROP CONSTRAINT [FK_GroupSubject_Group];
-GO
-IF OBJECT_ID(N'[dbo].[FK_GroupSubject_Subject]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GroupSubject] DROP CONSTRAINT [FK_GroupSubject_Subject];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TeacherSubject]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Subjects] DROP CONSTRAINT [FK_TeacherSubject];
-GO
-IF OBJECT_ID(N'[dbo].[FK_DaySubject]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Subjects] DROP CONSTRAINT [FK_DaySubject];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Students]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Students];
-GO
-IF OBJECT_ID(N'[dbo].[Groups]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Groups];
-GO
-IF OBJECT_ID(N'[dbo].[Subjects]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Subjects];
-GO
-IF OBJECT_ID(N'[dbo].[Teachers]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Teachers];
-GO
-IF OBJECT_ID(N'[dbo].[DaySet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DaySet];
-GO
-IF OBJECT_ID(N'[dbo].[GroupSubject]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[GroupSubject];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'Students'
-CREATE TABLE [dbo].[Students] (
+-- Creating table 'Paras'
+CREATE TABLE [dbo].[Paras] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [GroupId] int  NOT NULL,
-    [FirstName] nvarchar(max)  NOT NULL,
-    [LastName] nvarchar(max)  NOT NULL
+    [PrepodId] int  NOT NULL,
+    [Auditoria_Id] int  NOT NULL,
+    [Time_Id] int  NOT NULL,
+    [Den_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'Auditorias'
+CREATE TABLE [dbo].[Auditorias] (
+    [Id] int IDENTITY(1,1) NOT NULL
+);
+GO
+
+-- Creating table 'Times'
+CREATE TABLE [dbo].[Times] (
+    [Id] int IDENTITY(1,1) NOT NULL
 );
 GO
 
 -- Creating table 'Groups'
 CREATE TABLE [dbo].[Groups] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Id] int IDENTITY(1,1) NOT NULL
 );
 GO
 
--- Creating table 'Subjects'
-CREATE TABLE [dbo].[Subjects] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [TeacherId] int  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [DayId] int  NOT NULL
+-- Creating table 'Prepods'
+CREATE TABLE [dbo].[Prepods] (
+    [Id] int IDENTITY(1,1) NOT NULL
 );
 GO
 
--- Creating table 'Teachers'
-CREATE TABLE [dbo].[Teachers] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [FirstName] nvarchar(max)  NOT NULL,
-    [LastName] nvarchar(max)  NOT NULL,
-    [Hours] int  NOT NULL
+-- Creating table 'Dens'
+CREATE TABLE [dbo].[Dens] (
+    [Id] int IDENTITY(1,1) NOT NULL
 );
 GO
 
--- Creating table 'DaySet'
-CREATE TABLE [dbo].[DaySet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [DayName] nvarchar(max)  NOT NULL
+-- Creating table 'Predmets'
+CREATE TABLE [dbo].[Predmets] (
+    [Id] int IDENTITY(1,1) NOT NULL
 );
 GO
 
--- Creating table 'GroupSubject'
-CREATE TABLE [dbo].[GroupSubject] (
-    [Group_Id] int  NOT NULL,
-    [Subject_Id] int  NOT NULL
+-- Creating table 'Students'
+CREATE TABLE [dbo].[Students] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [GroupId] int  NOT NULL
+);
+GO
+
+-- Creating table 'ParaGroup'
+CREATE TABLE [dbo].[ParaGroup] (
+    [Paras_Id] int  NOT NULL,
+    [Groups_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'PredmetPrepod'
+CREATE TABLE [dbo].[PredmetPrepod] (
+    [Predmets_Id] int  NOT NULL,
+    [Prepods_Id] int  NOT NULL
 );
 GO
 
@@ -112,9 +98,21 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id] in table 'Students'
-ALTER TABLE [dbo].[Students]
-ADD CONSTRAINT [PK_Students]
+-- Creating primary key on [Id] in table 'Paras'
+ALTER TABLE [dbo].[Paras]
+ADD CONSTRAINT [PK_Paras]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Auditorias'
+ALTER TABLE [dbo].[Auditorias]
+ADD CONSTRAINT [PK_Auditorias]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Times'
+ALTER TABLE [dbo].[Times]
+ADD CONSTRAINT [PK_Times]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -124,97 +122,160 @@ ADD CONSTRAINT [PK_Groups]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Subjects'
-ALTER TABLE [dbo].[Subjects]
-ADD CONSTRAINT [PK_Subjects]
+-- Creating primary key on [Id] in table 'Prepods'
+ALTER TABLE [dbo].[Prepods]
+ADD CONSTRAINT [PK_Prepods]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Teachers'
-ALTER TABLE [dbo].[Teachers]
-ADD CONSTRAINT [PK_Teachers]
+-- Creating primary key on [Id] in table 'Dens'
+ALTER TABLE [dbo].[Dens]
+ADD CONSTRAINT [PK_Dens]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'DaySet'
-ALTER TABLE [dbo].[DaySet]
-ADD CONSTRAINT [PK_DaySet]
+-- Creating primary key on [Id] in table 'Predmets'
+ALTER TABLE [dbo].[Predmets]
+ADD CONSTRAINT [PK_Predmets]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Group_Id], [Subject_Id] in table 'GroupSubject'
-ALTER TABLE [dbo].[GroupSubject]
-ADD CONSTRAINT [PK_GroupSubject]
-    PRIMARY KEY NONCLUSTERED ([Group_Id], [Subject_Id] ASC);
+-- Creating primary key on [Id] in table 'Students'
+ALTER TABLE [dbo].[Students]
+ADD CONSTRAINT [PK_Students]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Paras_Id], [Groups_Id] in table 'ParaGroup'
+ALTER TABLE [dbo].[ParaGroup]
+ADD CONSTRAINT [PK_ParaGroup]
+    PRIMARY KEY NONCLUSTERED ([Paras_Id], [Groups_Id] ASC);
+GO
+
+-- Creating primary key on [Predmets_Id], [Prepods_Id] in table 'PredmetPrepod'
+ALTER TABLE [dbo].[PredmetPrepod]
+ADD CONSTRAINT [PK_PredmetPrepod]
+    PRIMARY KEY NONCLUSTERED ([Predmets_Id], [Prepods_Id] ASC);
 GO
 
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
+-- Creating foreign key on [Auditoria_Id] in table 'Paras'
+ALTER TABLE [dbo].[Paras]
+ADD CONSTRAINT [FK_ParaAuditoria]
+    FOREIGN KEY ([Auditoria_Id])
+    REFERENCES [dbo].[Auditorias]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ParaAuditoria'
+CREATE INDEX [IX_FK_ParaAuditoria]
+ON [dbo].[Paras]
+    ([Auditoria_Id]);
+GO
+
+-- Creating foreign key on [Time_Id] in table 'Paras'
+ALTER TABLE [dbo].[Paras]
+ADD CONSTRAINT [FK_ParaTime]
+    FOREIGN KEY ([Time_Id])
+    REFERENCES [dbo].[Times]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ParaTime'
+CREATE INDEX [IX_FK_ParaTime]
+ON [dbo].[Paras]
+    ([Time_Id]);
+GO
+
+-- Creating foreign key on [Paras_Id] in table 'ParaGroup'
+ALTER TABLE [dbo].[ParaGroup]
+ADD CONSTRAINT [FK_ParaGroup_Para]
+    FOREIGN KEY ([Paras_Id])
+    REFERENCES [dbo].[Paras]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Groups_Id] in table 'ParaGroup'
+ALTER TABLE [dbo].[ParaGroup]
+ADD CONSTRAINT [FK_ParaGroup_Group]
+    FOREIGN KEY ([Groups_Id])
+    REFERENCES [dbo].[Groups]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ParaGroup_Group'
+CREATE INDEX [IX_FK_ParaGroup_Group]
+ON [dbo].[ParaGroup]
+    ([Groups_Id]);
+GO
+
+-- Creating foreign key on [PrepodId] in table 'Paras'
+ALTER TABLE [dbo].[Paras]
+ADD CONSTRAINT [FK_PrepodPara]
+    FOREIGN KEY ([PrepodId])
+    REFERENCES [dbo].[Prepods]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PrepodPara'
+CREATE INDEX [IX_FK_PrepodPara]
+ON [dbo].[Paras]
+    ([PrepodId]);
+GO
+
+-- Creating foreign key on [Den_Id] in table 'Paras'
+ALTER TABLE [dbo].[Paras]
+ADD CONSTRAINT [FK_ParaDen]
+    FOREIGN KEY ([Den_Id])
+    REFERENCES [dbo].[Dens]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ParaDen'
+CREATE INDEX [IX_FK_ParaDen]
+ON [dbo].[Paras]
+    ([Den_Id]);
+GO
+
 -- Creating foreign key on [GroupId] in table 'Students'
 ALTER TABLE [dbo].[Students]
-ADD CONSTRAINT [FK_StudentGroup]
+ADD CONSTRAINT [FK_GroupStudent]
     FOREIGN KEY ([GroupId])
     REFERENCES [dbo].[Groups]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_StudentGroup'
-CREATE INDEX [IX_FK_StudentGroup]
+-- Creating non-clustered index for FOREIGN KEY 'FK_GroupStudent'
+CREATE INDEX [IX_FK_GroupStudent]
 ON [dbo].[Students]
     ([GroupId]);
 GO
 
--- Creating foreign key on [Group_Id] in table 'GroupSubject'
-ALTER TABLE [dbo].[GroupSubject]
-ADD CONSTRAINT [FK_GroupSubject_Group]
-    FOREIGN KEY ([Group_Id])
-    REFERENCES [dbo].[Groups]
+-- Creating foreign key on [Predmets_Id] in table 'PredmetPrepod'
+ALTER TABLE [dbo].[PredmetPrepod]
+ADD CONSTRAINT [FK_PredmetPrepod_Predmet]
+    FOREIGN KEY ([Predmets_Id])
+    REFERENCES [dbo].[Predmets]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Subject_Id] in table 'GroupSubject'
-ALTER TABLE [dbo].[GroupSubject]
-ADD CONSTRAINT [FK_GroupSubject_Subject]
-    FOREIGN KEY ([Subject_Id])
-    REFERENCES [dbo].[Subjects]
+-- Creating foreign key on [Prepods_Id] in table 'PredmetPrepod'
+ALTER TABLE [dbo].[PredmetPrepod]
+ADD CONSTRAINT [FK_PredmetPrepod_Prepod]
+    FOREIGN KEY ([Prepods_Id])
+    REFERENCES [dbo].[Prepods]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_GroupSubject_Subject'
-CREATE INDEX [IX_FK_GroupSubject_Subject]
-ON [dbo].[GroupSubject]
-    ([Subject_Id]);
-GO
-
--- Creating foreign key on [TeacherId] in table 'Subjects'
-ALTER TABLE [dbo].[Subjects]
-ADD CONSTRAINT [FK_TeacherSubject]
-    FOREIGN KEY ([TeacherId])
-    REFERENCES [dbo].[Teachers]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TeacherSubject'
-CREATE INDEX [IX_FK_TeacherSubject]
-ON [dbo].[Subjects]
-    ([TeacherId]);
-GO
-
--- Creating foreign key on [DayId] in table 'Subjects'
-ALTER TABLE [dbo].[Subjects]
-ADD CONSTRAINT [FK_DaySubject]
-    FOREIGN KEY ([DayId])
-    REFERENCES [dbo].[DaySet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_DaySubject'
-CREATE INDEX [IX_FK_DaySubject]
-ON [dbo].[Subjects]
-    ([DayId]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_PredmetPrepod_Prepod'
+CREATE INDEX [IX_FK_PredmetPrepod_Prepod]
+ON [dbo].[PredmetPrepod]
+    ([Prepods_Id]);
 GO
 
 -- --------------------------------------------------

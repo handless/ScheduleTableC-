@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TimeTable.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TimeTableStoreContainer">
+    <EntitySet Name="LessonSet" EntityType="TimeTable.Store.LessonSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClassroomSet" EntityType="TimeTable.Store.ClassroomSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TimeSet" EntityType="TimeTable.Store.TimeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupSet" EntityType="TimeTable.Store.GroupSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TeacherSet" EntityType="TimeTable.Store.TeacherSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DaySet" EntityType="TimeTable.Store.DaySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudentSet" EntityType="TimeTable.Store.StudentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SubjectSet" EntityType="TimeTable.Store.SubjectSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LessonGroup" EntityType="TimeTable.Store.LessonGroup" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TeacherSubject" EntityType="TimeTable.Store.TeacherSubject" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="LessonClassroom" Association="TimeTable.Store.LessonClassroom">
+      <End Role="Lesson" EntitySet="LessonSet" />
+      <End Role="Classroom" EntitySet="ClassroomSet" />
+    </AssociationSet>
+    <AssociationSet Name="LessonDay" Association="TimeTable.Store.LessonDay">
+      <End Role="Lesson" EntitySet="LessonSet" />
+      <End Role="Day" EntitySet="DaySet" />
+    </AssociationSet>
+    <AssociationSet Name="LessonTime" Association="TimeTable.Store.LessonTime">
+      <End Role="Lesson" EntitySet="LessonSet" />
+      <End Role="Time" EntitySet="TimeSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LessonGroup_Lesson" Association="TimeTable.Store.FK_LessonGroup_Lesson">
+      <End Role="Lesson" EntitySet="LessonSet" />
+      <End Role="LessonGroup" EntitySet="LessonGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LessonGroup_Group" Association="TimeTable.Store.FK_LessonGroup_Group">
+      <End Role="Group" EntitySet="GroupSet" />
+      <End Role="LessonGroup" EntitySet="LessonGroup" />
+    </AssociationSet>
+    <AssociationSet Name="TeacherLesson" Association="TimeTable.Store.TeacherLesson">
+      <End Role="Teacher" EntitySet="TeacherSet" />
+      <End Role="Lesson" EntitySet="LessonSet" />
+    </AssociationSet>
+    <AssociationSet Name="GroupStudent" Association="TimeTable.Store.GroupStudent">
+      <End Role="Group" EntitySet="GroupSet" />
+      <End Role="Student" EntitySet="StudentSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeacherSubject_Teacher" Association="TimeTable.Store.FK_TeacherSubject_Teacher">
+      <End Role="Teacher" EntitySet="TeacherSet" />
+      <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeacherSubject_Subject" Association="TimeTable.Store.FK_TeacherSubject_Subject">
+      <End Role="Subject" EntitySet="SubjectSet" />
+      <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LessonSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherId" Type="int" Nullable="false" />
+    <Property Name="Classroom_Id" Type="int" Nullable="false" />
+    <Property Name="Day_Id" Type="int" Nullable="false" />
+    <Property Name="Time_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClassroomSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TimeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GroupSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TeacherSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DaySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubjectSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LessonGroup">
+    <Key>
+      <PropertyRef Name="Lesson_Id" />
+      <PropertyRef Name="Group_Id" />
+    </Key>
+    <Property Name="Lesson_Id" Type="int" Nullable="false" />
+    <Property Name="Group_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TeacherSubject">
+    <Key>
+      <PropertyRef Name="Teacher_Id" />
+      <PropertyRef Name="Subject_Id" />
+    </Key>
+    <Property Name="Teacher_Id" Type="int" Nullable="false" />
+    <Property Name="Subject_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="LessonClassroom">
+    <End Role="Lesson" Type="TimeTable.Store.LessonSet" Multiplicity="*" />
+    <End Role="Classroom" Type="TimeTable.Store.ClassroomSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="Classroom_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LessonDay">
+    <End Role="Lesson" Type="TimeTable.Store.LessonSet" Multiplicity="*" />
+    <End Role="Day" Type="TimeTable.Store.DaySet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Day">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="Day_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LessonTime">
+    <End Role="Lesson" Type="TimeTable.Store.LessonSet" Multiplicity="*" />
+    <End Role="Time" Type="TimeTable.Store.TimeSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Time">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="Time_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeacherLesson">
+    <End Role="Teacher" Type="TimeTable.Store.TeacherSet" Multiplicity="1" />
+    <End Role="Lesson" Type="TimeTable.Store.LessonSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GroupStudent">
+    <End Role="Group" Type="TimeTable.Store.GroupSet" Multiplicity="1" />
+    <End Role="Student" Type="TimeTable.Store.StudentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LessonGroup_Lesson">
+    <End Role="Lesson" Type="TimeTable.Store.LessonSet" Multiplicity="1" />
+    <End Role="LessonGroup" Type="TimeTable.Store.LessonGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lesson">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LessonGroup">
+        <PropertyRef Name="Lesson_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LessonGroup_Group">
+    <End Role="LessonGroup" Type="TimeTable.Store.LessonGroup" Multiplicity="*" />
+    <End Role="Group" Type="TimeTable.Store.GroupSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LessonGroup">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeacherSubject_Teacher">
+    <End Role="Teacher" Type="TimeTable.Store.TeacherSet" Multiplicity="1" />
+    <End Role="TeacherSubject" Type="TimeTable.Store.TeacherSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherSubject">
+        <PropertyRef Name="Teacher_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeacherSubject_Subject">
+    <End Role="TeacherSubject" Type="TimeTable.Store.TeacherSubject" Multiplicity="*" />
+    <End Role="Subject" Type="TimeTable.Store.SubjectSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherSubject">
+        <PropertyRef Name="Subject_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TimeTable" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="TimeTableContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LessonSet" EntityType="TimeTable.Lesson" />
+          <EntitySet Name="ClassroomSet" EntityType="TimeTable.Classroom" />
+          <EntitySet Name="TimeSet" EntityType="TimeTable.Time" />
+          <EntitySet Name="GroupSet" EntityType="TimeTable.Group" />
+          <EntitySet Name="TeacherSet" EntityType="TimeTable.Teacher" />
+          <EntitySet Name="DaySet" EntityType="TimeTable.Day" />
+          <EntitySet Name="StudentSet" EntityType="TimeTable.Student" />
+          <EntitySet Name="SubjectSet" EntityType="TimeTable.Subject" />
+          <AssociationSet Name="LessonClassroom" Association="TimeTable.LessonClassroom">
+            <End Role="Lesson" EntitySet="LessonSet" />
+            <End Role="Classroom" EntitySet="ClassroomSet" />
+          </AssociationSet>
+          <AssociationSet Name="LessonDay" Association="TimeTable.LessonDay">
+            <End Role="Lesson" EntitySet="LessonSet" />
+            <End Role="Day" EntitySet="DaySet" />
+          </AssociationSet>
+          <AssociationSet Name="LessonTime" Association="TimeTable.LessonTime">
+            <End Role="Lesson" EntitySet="LessonSet" />
+            <End Role="Time" EntitySet="TimeSet" />
+          </AssociationSet>
+          <AssociationSet Name="LessonGroup" Association="TimeTable.LessonGroup">
+            <End Role="Lesson" EntitySet="LessonSet" />
+            <End Role="Group" EntitySet="GroupSet" />
+          </AssociationSet>
+          <AssociationSet Name="TeacherLesson" Association="TimeTable.TeacherLesson">
+            <End Role="Teacher" EntitySet="TeacherSet" />
+            <End Role="Lesson" EntitySet="LessonSet" />
+          </AssociationSet>
+          <AssociationSet Name="GroupStudent" Association="TimeTable.GroupStudent">
+            <End Role="Group" EntitySet="GroupSet" />
+            <End Role="Student" EntitySet="StudentSet" />
+          </AssociationSet>
+          <AssociationSet Name="TeacherSubject" Association="TimeTable.TeacherSubject">
+            <End Role="Teacher" EntitySet="TeacherSet" />
+            <End Role="Subject" EntitySet="SubjectSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Classroom" Relationship="TimeTable.LessonClassroom" FromRole="Lesson" ToRole="Classroom" />
+          <NavigationProperty Name="Day" Relationship="TimeTable.LessonDay" FromRole="Lesson" ToRole="Day" />
+          <NavigationProperty Name="Time" Relationship="TimeTable.LessonTime" FromRole="Lesson" ToRole="Time" />
+          <NavigationProperty Name="Group" Relationship="TimeTable.LessonGroup" FromRole="Lesson" ToRole="Group" />
+          <NavigationProperty Name="Teacher" Relationship="TimeTable.TeacherLesson" FromRole="Lesson" ToRole="Teacher" />
+          <Property Type="Int32" Name="TeacherId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Classroom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Lesson" Relationship="TimeTable.LessonClassroom" FromRole="Classroom" ToRole="Lesson" />
+          <Property Type="String" Name="Name" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Lesson" Relationship="TimeTable.LessonTime" FromRole="Time" ToRole="Lesson" />
+          <Property Type="DateTime" Name="InTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Lesson" Relationship="TimeTable.LessonGroup" FromRole="Group" ToRole="Lesson" />
+          <NavigationProperty Name="Student" Relationship="TimeTable.GroupStudent" FromRole="Group" ToRole="Student" />
+          <Property Type="String" Name="Name" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Lesson" Relationship="TimeTable.TeacherLesson" FromRole="Teacher" ToRole="Lesson" />
+          <NavigationProperty Name="Subject" Relationship="TimeTable.TeacherSubject" FromRole="Teacher" ToRole="Subject" />
+          <Property Type="String" Name="FirstName" Nullable="false" />
+          <Property Type="String" Name="LastName" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Day">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Lesson" Relationship="TimeTable.LessonDay" FromRole="Day" ToRole="Lesson" />
+          <Property Type="String" Name="Name" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Group" Relationship="TimeTable.GroupStudent" FromRole="Student" ToRole="Group" />
+          <Property Type="Int32" Name="GroupId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" />
+          <Property Type="String" Name="LastName" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Teacher" Relationship="TimeTable.TeacherSubject" FromRole="Subject" ToRole="Teacher" />
+          <Property Type="String" Name="Name" Nullable="false" />
+        </EntityType>
+        <Association Name="LessonClassroom">
+          <End Type="TimeTable.Lesson" Role="Lesson" Multiplicity="1" />
+          <End Type="TimeTable.Classroom" Role="Classroom" Multiplicity="1" />
+        </Association>
+        <Association Name="LessonDay">
+          <End Type="TimeTable.Lesson" Role="Lesson" Multiplicity="1" />
+          <End Type="TimeTable.Day" Role="Day" Multiplicity="1" />
+        </Association>
+        <Association Name="LessonTime">
+          <End Type="TimeTable.Lesson" Role="Lesson" Multiplicity="1" />
+          <End Type="TimeTable.Time" Role="Time" Multiplicity="1" />
+        </Association>
+        <Association Name="LessonGroup">
+          <End Type="TimeTable.Lesson" Role="Lesson" Multiplicity="*" />
+          <End Type="TimeTable.Group" Role="Group" Multiplicity="*" />
+        </Association>
+        <Association Name="TeacherLesson">
+          <End Type="TimeTable.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="TimeTable.Lesson" Role="Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupStudent">
+          <End Type="TimeTable.Group" Role="Group" Multiplicity="1" />
+          <End Type="TimeTable.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TeacherSubject">
+          <End Type="TimeTable.Teacher" Role="Teacher" Multiplicity="*" />
+          <End Type="TimeTable.Subject" Role="Subject" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TimeTableStoreContainer" CdmEntityContainer="TimeTableContainer">
+    <EntitySetMapping Name="LessonSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Lesson)">
+        <MappingFragment StoreEntitySet="LessonSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassroomSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Classroom)">
+        <MappingFragment StoreEntitySet="ClassroomSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Time)">
+        <MappingFragment StoreEntitySet="TimeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="InTime" ColumnName="InTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Group)">
+        <MappingFragment StoreEntitySet="GroupSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeacherSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Teacher)">
+        <MappingFragment StoreEntitySet="TeacherSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DaySet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Day)">
+        <MappingFragment StoreEntitySet="DaySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Student)">
+        <MappingFragment StoreEntitySet="StudentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubjectSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TimeTable.Subject)">
+        <MappingFragment StoreEntitySet="SubjectSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LessonClassroom" TypeName="TimeTable.LessonClassroom" StoreEntitySet="LessonSet">
+      <EndProperty Name="Classroom">
+        <ScalarProperty Name="Id" ColumnName="Classroom_Id" />
+      </EndProperty>
+      <EndProperty Name="Lesson">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LessonDay" TypeName="TimeTable.LessonDay" StoreEntitySet="LessonSet">
+      <EndProperty Name="Day">
+        <ScalarProperty Name="Id" ColumnName="Day_Id" />
+      </EndProperty>
+      <EndProperty Name="Lesson">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LessonTime" TypeName="TimeTable.LessonTime" StoreEntitySet="LessonSet">
+      <EndProperty Name="Time">
+        <ScalarProperty Name="Id" ColumnName="Time_Id" />
+      </EndProperty>
+      <EndProperty Name="Lesson">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LessonGroup" TypeName="TimeTable.LessonGroup" StoreEntitySet="LessonGroup">
+      <EndProperty Name="Lesson">
+        <ScalarProperty Name="Id" ColumnName="Lesson_Id" />
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TeacherSubject" TypeName="TimeTable.TeacherSubject" StoreEntitySet="TeacherSubject">
+      <EndProperty Name="Teacher">
+        <ScalarProperty Name="Id" ColumnName="Teacher_Id" />
+      </EndProperty>
+      <EndProperty Name="Subject">
+        <ScalarProperty Name="Id" ColumnName="Subject_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

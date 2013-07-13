@@ -11,17 +11,16 @@ namespace Schedule.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
-    public partial class Subject
+    public partial class Classroom
     {
-        public Subject()
-        {
-            this.Teacher = new HashSet<Teacher>();
-        }
-    
         public int Id { get; set; }
+
+        [Required]
+        [Display (Name="Название Аудитории")]
         public string Name { get; set; }
     
-        public virtual ICollection<Teacher> Teacher { get; set; }
+        public virtual Lesson Lesson { get; set; }
     }
 }

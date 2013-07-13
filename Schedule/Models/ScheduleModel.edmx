@@ -6,85 +6,173 @@
     <edmx:StorageModels>
     <Schema Namespace="ScheduleModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="ScheduleModelStoreContainer">
-    <EntitySet Name="Students" EntityType="ScheduleModel.Store.Students" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Paras" EntityType="ScheduleModel.Store.Paras" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Auditorias" EntityType="ScheduleModel.Store.Auditorias" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Times" EntityType="ScheduleModel.Store.Times" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Groups" EntityType="ScheduleModel.Store.Groups" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Subjects" EntityType="ScheduleModel.Store.Subjects" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Teachers" EntityType="ScheduleModel.Store.Teachers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="DaySet" EntityType="ScheduleModel.Store.DaySet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="GroupSubject" EntityType="ScheduleModel.Store.GroupSubject" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="StudentGroup" Association="ScheduleModel.Store.StudentGroup">
+    <EntitySet Name="Prepods" EntityType="ScheduleModel.Store.Prepods" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Dens" EntityType="ScheduleModel.Store.Dens" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Predmets" EntityType="ScheduleModel.Store.Predmets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Students" EntityType="ScheduleModel.Store.Students" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ParaGroup" EntityType="ScheduleModel.Store.ParaGroup" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PredmetPrepod" EntityType="ScheduleModel.Store.PredmetPrepod" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ParaAuditoria" Association="ScheduleModel.Store.ParaAuditoria">
+      <End Role="Para" EntitySet="Paras" />
+      <End Role="Auditoria" EntitySet="Auditorias" />
+    </AssociationSet>
+    <AssociationSet Name="ParaTime" Association="ScheduleModel.Store.ParaTime">
+      <End Role="Para" EntitySet="Paras" />
+      <End Role="Time" EntitySet="Times" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ParaGroup_Para" Association="ScheduleModel.Store.FK_ParaGroup_Para">
+      <End Role="Para" EntitySet="Paras" />
+      <End Role="ParaGroup" EntitySet="ParaGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ParaGroup_Group" Association="ScheduleModel.Store.FK_ParaGroup_Group">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="ParaGroup" EntitySet="ParaGroup" />
+    </AssociationSet>
+    <AssociationSet Name="PrepodPara" Association="ScheduleModel.Store.PrepodPara">
+      <End Role="Prepod" EntitySet="Prepods" />
+      <End Role="Para" EntitySet="Paras" />
+    </AssociationSet>
+    <AssociationSet Name="ParaDen" Association="ScheduleModel.Store.ParaDen">
+      <End Role="Para" EntitySet="Paras" />
+      <End Role="Den" EntitySet="Dens" />
+    </AssociationSet>
+    <AssociationSet Name="GroupStudent" Association="ScheduleModel.Store.GroupStudent">
+      <End Role="Group" EntitySet="Groups" />
       <End Role="Student" EntitySet="Students" />
-      <End Role="Group" EntitySet="Groups" />
     </AssociationSet>
-    <AssociationSet Name="FK_GroupSubject_Group" Association="ScheduleModel.Store.FK_GroupSubject_Group">
-      <End Role="Group" EntitySet="Groups" />
-      <End Role="GroupSubject" EntitySet="GroupSubject" />
+    <AssociationSet Name="FK_PredmetPrepod_Predmet" Association="ScheduleModel.Store.FK_PredmetPrepod_Predmet">
+      <End Role="Predmet" EntitySet="Predmets" />
+      <End Role="PredmetPrepod" EntitySet="PredmetPrepod" />
     </AssociationSet>
-    <AssociationSet Name="FK_GroupSubject_Subject" Association="ScheduleModel.Store.FK_GroupSubject_Subject">
-      <End Role="Subject" EntitySet="Subjects" />
-      <End Role="GroupSubject" EntitySet="GroupSubject" />
-    </AssociationSet>
-    <AssociationSet Name="TeacherSubject" Association="ScheduleModel.Store.TeacherSubject">
-      <End Role="Teacher" EntitySet="Teachers" />
-      <End Role="Subject" EntitySet="Subjects" />
-    </AssociationSet>
-    <AssociationSet Name="DaySubject" Association="ScheduleModel.Store.DaySubject">
-      <End Role="Day" EntitySet="DaySet" />
-      <End Role="Subject" EntitySet="Subjects" />
+    <AssociationSet Name="FK_PredmetPrepod_Prepod" Association="ScheduleModel.Store.FK_PredmetPrepod_Prepod">
+      <End Role="Prepod" EntitySet="Prepods" />
+      <End Role="PredmetPrepod" EntitySet="PredmetPrepod" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Students">
+  <EntityType Name="Paras">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GroupId" Type="int" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrepodId" Type="int" Nullable="false" />
+    <Property Name="Auditoria_Id" Type="int" Nullable="false" />
+    <Property Name="Time_Id" Type="int" Nullable="false" />
+    <Property Name="Den_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Auditorias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Times">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Groups">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="Subjects">
+  <EntityType Name="Prepods">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TeacherId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DayId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Teachers">
+  <EntityType Name="Dens">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Hours" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="DaySet">
+  <EntityType Name="Predmets">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DayName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="GroupSubject">
+  <EntityType Name="Students">
     <Key>
-      <PropertyRef Name="Group_Id" />
-      <PropertyRef Name="Subject_Id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Group_Id" Type="int" Nullable="false" />
-    <Property Name="Subject_Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="StudentGroup">
-    <End Role="Student" Type="ScheduleModel.Store.Students" Multiplicity="*" />
+  <EntityType Name="ParaGroup">
+    <Key>
+      <PropertyRef Name="Paras_Id" />
+      <PropertyRef Name="Groups_Id" />
+    </Key>
+    <Property Name="Paras_Id" Type="int" Nullable="false" />
+    <Property Name="Groups_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PredmetPrepod">
+    <Key>
+      <PropertyRef Name="Predmets_Id" />
+      <PropertyRef Name="Prepods_Id" />
+    </Key>
+    <Property Name="Predmets_Id" Type="int" Nullable="false" />
+    <Property Name="Prepods_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ParaAuditoria">
+    <End Role="Para" Type="ScheduleModel.Store.Paras" Multiplicity="*" />
+    <End Role="Auditoria" Type="ScheduleModel.Store.Auditorias" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Auditoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Para">
+        <PropertyRef Name="Auditoria_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ParaTime">
+    <End Role="Para" Type="ScheduleModel.Store.Paras" Multiplicity="*" />
+    <End Role="Time" Type="ScheduleModel.Store.Times" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Time">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Para">
+        <PropertyRef Name="Time_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PrepodPara">
+    <End Role="Prepod" Type="ScheduleModel.Store.Prepods" Multiplicity="1" />
+    <End Role="Para" Type="ScheduleModel.Store.Paras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prepod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Para">
+        <PropertyRef Name="PrepodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ParaDen">
+    <End Role="Para" Type="ScheduleModel.Store.Paras" Multiplicity="*" />
+    <End Role="Den" Type="ScheduleModel.Store.Dens" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Den">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Para">
+        <PropertyRef Name="Den_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GroupStudent">
     <End Role="Group" Type="ScheduleModel.Store.Groups" Multiplicity="1" />
+    <End Role="Student" Type="ScheduleModel.Store.Students" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Group">
         <PropertyRef Name="Id" />
@@ -94,51 +182,51 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="TeacherSubject">
-    <End Role="Teacher" Type="ScheduleModel.Store.Teachers" Multiplicity="1" />
-    <End Role="Subject" Type="ScheduleModel.Store.Subjects" Multiplicity="*" />
+  <Association Name="FK_ParaGroup_Para">
+    <End Role="Para" Type="ScheduleModel.Store.Paras" Multiplicity="1" />
+    <End Role="ParaGroup" Type="ScheduleModel.Store.ParaGroup" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Teacher">
+      <Principal Role="Para">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Subject">
-        <PropertyRef Name="TeacherId" />
+      <Dependent Role="ParaGroup">
+        <PropertyRef Name="Paras_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="DaySubject">
-    <End Role="Day" Type="ScheduleModel.Store.DaySet" Multiplicity="1" />
-    <End Role="Subject" Type="ScheduleModel.Store.Subjects" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Day">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Subject">
-        <PropertyRef Name="DayId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_GroupSubject_Group">
+  <Association Name="FK_ParaGroup_Group">
+    <End Role="ParaGroup" Type="ScheduleModel.Store.ParaGroup" Multiplicity="*" />
     <End Role="Group" Type="ScheduleModel.Store.Groups" Multiplicity="1" />
-    <End Role="GroupSubject" Type="ScheduleModel.Store.GroupSubject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Group">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="GroupSubject">
-        <PropertyRef Name="Group_Id" />
+      <Dependent Role="ParaGroup">
+        <PropertyRef Name="Groups_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_GroupSubject_Subject">
-    <End Role="GroupSubject" Type="ScheduleModel.Store.GroupSubject" Multiplicity="*" />
-    <End Role="Subject" Type="ScheduleModel.Store.Subjects" Multiplicity="1" />
+  <Association Name="FK_PredmetPrepod_Predmet">
+    <End Role="Predmet" Type="ScheduleModel.Store.Predmets" Multiplicity="1" />
+    <End Role="PredmetPrepod" Type="ScheduleModel.Store.PredmetPrepod" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Subject">
+      <Principal Role="Predmet">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="GroupSubject">
-        <PropertyRef Name="Subject_Id" />
+      <Dependent Role="PredmetPrepod">
+        <PropertyRef Name="Predmets_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PredmetPrepod_Prepod">
+    <End Role="PredmetPrepod" Type="ScheduleModel.Store.PredmetPrepod" Multiplicity="*" />
+    <End Role="Prepod" Type="ScheduleModel.Store.Prepods" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Prepod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PredmetPrepod">
+        <PropertyRef Name="Prepods_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -147,72 +235,138 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ScheduleModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="ScheduleModelContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Students" EntityType="ScheduleModel.Student" />
+          <EntitySet Name="Paras" EntityType="ScheduleModel.Para" />
+          <EntitySet Name="Auditorias" EntityType="ScheduleModel.Auditoria" />
+          <EntitySet Name="Times" EntityType="ScheduleModel.Time" />
           <EntitySet Name="Groups" EntityType="ScheduleModel.Group" />
-          <EntitySet Name="Subjects" EntityType="ScheduleModel.Subject" />
-          <EntitySet Name="Teachers" EntityType="ScheduleModel.Teacher" />
-          <AssociationSet Name="StudentGroup" Association="ScheduleModel.StudentGroup">
+          <EntitySet Name="Prepods" EntityType="ScheduleModel.Prepod" />
+          <EntitySet Name="Dens" EntityType="ScheduleModel.Den" />
+          <EntitySet Name="Predmets" EntityType="ScheduleModel.Predmet" />
+          <EntitySet Name="Students" EntityType="ScheduleModel.Student" />
+          <AssociationSet Name="ParaAuditoria" Association="ScheduleModel.ParaAuditoria">
+            <End Role="Para" EntitySet="Paras" />
+            <End Role="Auditoria" EntitySet="Auditorias" />
+          </AssociationSet>
+          <AssociationSet Name="ParaTime" Association="ScheduleModel.ParaTime">
+            <End Role="Para" EntitySet="Paras" />
+            <End Role="Time" EntitySet="Times" />
+          </AssociationSet>
+          <AssociationSet Name="ParaGroup" Association="ScheduleModel.ParaGroup">
+            <End Role="Para" EntitySet="Paras" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="PrepodPara" Association="ScheduleModel.PrepodPara">
+            <End Role="Prepod" EntitySet="Prepods" />
+            <End Role="Para" EntitySet="Paras" />
+          </AssociationSet>
+          <AssociationSet Name="ParaDen" Association="ScheduleModel.ParaDen">
+            <End Role="Para" EntitySet="Paras" />
+            <End Role="Den" EntitySet="Dens" />
+          </AssociationSet>
+          <AssociationSet Name="GroupStudent" Association="ScheduleModel.GroupStudent">
+            <End Role="Group" EntitySet="Groups" />
             <End Role="Student" EntitySet="Students" />
-            <End Role="Group" EntitySet="Groups" />
           </AssociationSet>
-          <AssociationSet Name="GroupSubject" Association="ScheduleModel.GroupSubject">
-            <End Role="Group" EntitySet="Groups" />
-            <End Role="Subject" EntitySet="Subjects" />
-          </AssociationSet>
-          <AssociationSet Name="TeacherSubject" Association="ScheduleModel.TeacherSubject">
-            <End Role="Teacher" EntitySet="Teachers" />
-            <End Role="Subject" EntitySet="Subjects" />
-          </AssociationSet>
-          <EntitySet Name="DaySet" EntityType="ScheduleModel.Day" />
-          <AssociationSet Name="DaySubject" Association="ScheduleModel.DaySubject">
-            <End Role="Day" EntitySet="DaySet" />
-            <End Role="Subject" EntitySet="Subjects" />
+          <AssociationSet Name="PredmetPrepod" Association="ScheduleModel.PredmetPrepod">
+            <End Role="Predmet" EntitySet="Predmets" />
+            <End Role="Prepod" EntitySet="Prepods" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Student">
+        <EntityType Name="Para">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Group" Relationship="ScheduleModel.StudentGroup" FromRole="Student" ToRole="Group" />
-          <Property Type="Int32" Name="GroupId" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" />
-          <Property Type="String" Name="LastName" Nullable="false" />
+          <NavigationProperty Name="Auditoria" Relationship="ScheduleModel.ParaAuditoria" FromRole="Para" ToRole="Auditoria" />
+          <NavigationProperty Name="Time" Relationship="ScheduleModel.ParaTime" FromRole="Para" ToRole="Time" />
+          <NavigationProperty Name="Groups" Relationship="ScheduleModel.ParaGroup" FromRole="Para" ToRole="Group" />
+          <NavigationProperty Name="Prepod" Relationship="ScheduleModel.PrepodPara" FromRole="Para" ToRole="Prepod" />
+          <Property Type="Int32" Name="PrepodId" Nullable="false" />
+          <NavigationProperty Name="Den" Relationship="ScheduleModel.ParaDen" FromRole="Para" ToRole="Den" />
+        </EntityType>
+        <EntityType Name="Auditoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Para" Relationship="ScheduleModel.ParaAuditoria" FromRole="Auditoria" ToRole="Para" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Para" Relationship="ScheduleModel.ParaTime" FromRole="Time" ToRole="Para" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Student" Relationship="ScheduleModel.StudentGroup" FromRole="Group" ToRole="Student" />
-          <NavigationProperty Name="Subject" Relationship="ScheduleModel.GroupSubject" FromRole="Group" ToRole="Subject" />
-          <Property Type="String" Name="Name" Nullable="false" />
+          <NavigationProperty Name="Paras" Relationship="ScheduleModel.ParaGroup" FromRole="Group" ToRole="Para" />
+          <NavigationProperty Name="Students" Relationship="ScheduleModel.GroupStudent" FromRole="Group" ToRole="Student" />
         </EntityType>
-        <EntityType Name="Subject">
+        <EntityType Name="Prepod">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Group" Relationship="ScheduleModel.GroupSubject" FromRole="Subject" ToRole="Group" />
-          <NavigationProperty Name="Teacher" Relationship="ScheduleModel.TeacherSubject" FromRole="Subject" ToRole="Teacher" />
-          <Property Type="Int32" Name="TeacherId" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <NavigationProperty Name="Day" Relationship="ScheduleModel.DaySubject" FromRole="Subject" ToRole="Day" />
-          <Property Type="Int32" Name="DayId" Nullable="false" />
+          <NavigationProperty Name="Paras" Relationship="ScheduleModel.PrepodPara" FromRole="Prepod" ToRole="Para" />
+          <NavigationProperty Name="Predmets" Relationship="ScheduleModel.PredmetPrepod" FromRole="Prepod" ToRole="Predmet" />
         </EntityType>
-        <EntityType Name="Teacher">
+        <EntityType Name="Den">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Subject" Relationship="ScheduleModel.TeacherSubject" FromRole="Teacher" ToRole="Subject" />
-          <Property Type="String" Name="FirstName" Nullable="false" />
-          <Property Type="String" Name="LastName" Nullable="false" />
-          <Property Type="Int32" Name="Hours" Nullable="false" />
+          <NavigationProperty Name="Para" Relationship="ScheduleModel.ParaDen" FromRole="Den" ToRole="Para" />
         </EntityType>
-        <Association Name="StudentGroup">
-          <End Type="ScheduleModel.Student" Role="Student" Multiplicity="*" />
+        <EntityType Name="Predmet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Prepods" Relationship="ScheduleModel.PredmetPrepod" FromRole="Predmet" ToRole="Prepod" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Group" Relationship="ScheduleModel.GroupStudent" FromRole="Student" ToRole="Group" />
+          <Property Type="Int32" Name="GroupId" Nullable="false" />
+        </EntityType>
+        <Association Name="ParaAuditoria">
+          <End Type="ScheduleModel.Para" Role="Para" Multiplicity="1" />
+          <End Type="ScheduleModel.Auditoria" Role="Auditoria" Multiplicity="1" />
+        </Association>
+        <Association Name="ParaTime">
+          <End Type="ScheduleModel.Para" Role="Para" Multiplicity="1" />
+          <End Type="ScheduleModel.Time" Role="Time" Multiplicity="1" />
+        </Association>
+        <Association Name="ParaGroup">
+          <End Type="ScheduleModel.Para" Role="Para" Multiplicity="*" />
+          <End Type="ScheduleModel.Group" Role="Group" Multiplicity="*" />
+        </Association>
+        <Association Name="PrepodPara">
+          <End Type="ScheduleModel.Prepod" Role="Prepod" Multiplicity="1" />
+          <End Type="ScheduleModel.Para" Role="Para" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prepod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Para">
+              <PropertyRef Name="PrepodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ParaDen">
+          <End Type="ScheduleModel.Para" Role="Para" Multiplicity="1" />
+          <End Type="ScheduleModel.Den" Role="Den" Multiplicity="1" />
+        </Association>
+        <Association Name="GroupStudent">
           <End Type="ScheduleModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="ScheduleModel.Student" Role="Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Group">
               <PropertyRef Name="Id" />
@@ -222,55 +376,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="GroupSubject">
-          <End Type="ScheduleModel.Group" Role="Group" Multiplicity="*" />
-          <End Type="ScheduleModel.Subject" Role="Subject" Multiplicity="*" />
+        <Association Name="PredmetPrepod">
+          <End Type="ScheduleModel.Predmet" Role="Predmet" Multiplicity="*" />
+          <End Type="ScheduleModel.Prepod" Role="Prepod" Multiplicity="*" />
         </Association>
-        <Association Name="TeacherSubject">
-          <End Type="ScheduleModel.Teacher" Role="Teacher" Multiplicity="1" />
-          <End Type="ScheduleModel.Subject" Role="Subject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Subject">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Day">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Subject" Relationship="ScheduleModel.DaySubject" FromRole="Day" ToRole="Subject" />
-          <Property Type="String" Name="DayName" Nullable="false" />
-        </EntityType>
-        <Association Name="DaySubject">
-          <End Type="ScheduleModel.Day" Role="Day" Multiplicity="1" />
-          <End Type="ScheduleModel.Subject" Role="Subject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Day">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Subject">
-              <PropertyRef Name="DayId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ScheduleModelStoreContainer" CdmEntityContainer="ScheduleModelContainer">
-    <EntitySetMapping Name="Students">
-      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Student)">
-        <MappingFragment StoreEntitySet="Students">
+    <EntitySetMapping Name="Paras">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Para)">
+        <MappingFragment StoreEntitySet="Paras">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PrepodId" ColumnName="PrepodId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Auditorias">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Auditoria)">
+        <MappingFragment StoreEntitySet="Auditorias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Times">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Time)">
+        <MappingFragment StoreEntitySet="Times">
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -278,44 +412,76 @@
       <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Group)">
         <MappingFragment StoreEntitySet="Groups">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Subjects">
-      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Subject)">
-        <MappingFragment StoreEntitySet="Subjects">
+    <EntitySetMapping Name="Prepods">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Prepod)">
+        <MappingFragment StoreEntitySet="Prepods">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DayId" ColumnName="DayId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Teachers">
-      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Teacher)">
-        <MappingFragment StoreEntitySet="Teachers">
+    <EntitySetMapping Name="Dens">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Den)">
+        <MappingFragment StoreEntitySet="Dens">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Hours" ColumnName="Hours" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DaySet">
-      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Day)">
-        <MappingFragment StoreEntitySet="DaySet">
+    <EntitySetMapping Name="Predmets">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Predmet)">
+        <MappingFragment StoreEntitySet="Predmets">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DayName" ColumnName="DayName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="GroupSubject" TypeName="ScheduleModel.GroupSubject" StoreEntitySet="GroupSubject">
-      <EndProperty Name="Group">
-        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Student)">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ParaAuditoria" TypeName="ScheduleModel.ParaAuditoria" StoreEntitySet="Paras">
+      <EndProperty Name="Auditoria">
+        <ScalarProperty Name="Id" ColumnName="Auditoria_Id" />
       </EndProperty>
-      <EndProperty Name="Subject">
-        <ScalarProperty Name="Id" ColumnName="Subject_Id" />
+      <EndProperty Name="Para">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ParaTime" TypeName="ScheduleModel.ParaTime" StoreEntitySet="Paras">
+      <EndProperty Name="Time">
+        <ScalarProperty Name="Id" ColumnName="Time_Id" />
+      </EndProperty>
+      <EndProperty Name="Para">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ParaGroup" TypeName="ScheduleModel.ParaGroup" StoreEntitySet="ParaGroup">
+      <EndProperty Name="Para">
+        <ScalarProperty Name="Id" ColumnName="Paras_Id" />
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Groups_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ParaDen" TypeName="ScheduleModel.ParaDen" StoreEntitySet="Paras">
+      <EndProperty Name="Den">
+        <ScalarProperty Name="Id" ColumnName="Den_Id" />
+      </EndProperty>
+      <EndProperty Name="Para">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PredmetPrepod" TypeName="ScheduleModel.PredmetPrepod" StoreEntitySet="PredmetPrepod">
+      <EndProperty Name="Predmet">
+        <ScalarProperty Name="Id" ColumnName="Predmets_Id" />
+      </EndProperty>
+      <EndProperty Name="Prepod">
+        <ScalarProperty Name="Id" ColumnName="Prepods_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
@@ -331,8 +497,9 @@
     <edmx:Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

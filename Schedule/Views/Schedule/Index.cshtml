@@ -4,7 +4,15 @@
 
 <h2>Schedule Index</h2>
 
-@foreach (var prep in ViewBag.prepods)
+@*@foreach (var prep in ViewBag.prepods)
 { 
     <li>@prep.FirstName</li>
-}
+}*@
+
+@section content{
+@Html.ActionLink("Расписание Групп", "GroupSchedule", "Schedule")
+@Html.ActionLink("Расписание преподователей", "TeacherSchedule", "Schedule")
+
+
+
+    }

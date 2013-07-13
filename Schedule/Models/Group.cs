@@ -11,19 +11,23 @@ namespace Schedule.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Group
     {
         public Group()
         {
+            this.Lesson = new HashSet<Lesson>();
             this.Student = new HashSet<Student>();
-            this.Subject = new HashSet<Subject>();
         }
     
         public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
         public string Name { get; set; }
     
+        public virtual ICollection<Lesson> Lesson { get; set; }
         public virtual ICollection<Student> Student { get; set; }
-        public virtual ICollection<Subject> Subject { get; set; }
     }
 }

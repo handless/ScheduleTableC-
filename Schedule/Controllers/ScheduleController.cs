@@ -13,7 +13,8 @@ namespace Schedule.Controllers
         //
         // GET: /Schedule/
 
-        ScheduleModelContainer container = new ScheduleModelContainer();
+        TimeTableContainer containter = new TimeTableContainer();
+       // ScheduleModelContainer container = new ScheduleModelContainer();
 
         //[Authorize]
         [AllowAnonymous]
@@ -33,9 +34,31 @@ namespace Schedule.Controllers
             //};
             //container.Teachers.Add(tt);
             //container.SaveChanges();
+           
 
-            var prepods = container.Teachers.Where(m => m.Id > 0);
-            ViewBag.prepods = prepods;
+            
+            return View();
+        }
+
+        public ActionResult GroupSchedule()
+        {
+            Queue<Group> queuegroup = new Queue<Group>();
+            var mygroup = containter.GroupSet.Where(q => q.Id > 0);
+            foreach (var item in mygroup)
+            {
+                queuegroup.Enqueue(item);
+            }
+
+            ViewBag.Group = queuegroup;
+
+            var mySubject = containter.SubjectSet.Where(q => q.Teacher == containter.TeacherSet.Where(r => r.)
+            return View();
+        }
+
+        public ActionResult TeacherSchedule()
+        {
+            
+            ViewBag.Teachers = containter.TeacherSet.Where(g => g.Id > 0);
             return View();
         }
 

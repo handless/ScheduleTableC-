@@ -1,8 +1,4 @@
-﻿@{
-    ViewBag.Title = "GroupAdd";
-}
-
-@model Schedule.Models.Group
+﻿@model Schedule.Models.Classroom
 
 <h2>Group Add</h2>
 @section content {
@@ -10,7 +6,7 @@
         @Html.ValidationSummary(true)
 
         <fieldset>
-            <legend> Input Group Name</legend>
+            <legend> Input Class Room Name</legend>
 
             <div class="editor-label">
                 @Html.LabelFor(model => model.Name)

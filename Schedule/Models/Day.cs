@@ -14,14 +14,9 @@ namespace Schedule.Models
     
     public partial class Day
     {
-        public Day()
-        {
-            this.Subject = new HashSet<Subject>();
-        }
-    
         public int Id { get; set; }
-        public string DayName { get; set; }
+        public string Name { get; set; }
     
-        public virtual ICollection<Subject> Subject { get; set; }
+        public virtual Lesson Lesson { get; set; }
     }
 }

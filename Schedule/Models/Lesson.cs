@@ -12,16 +12,20 @@ namespace Schedule.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Subject
+    public partial class Lesson
     {
-        public Subject()
+        public Lesson()
         {
-            this.Teacher = new HashSet<Teacher>();
+            this.Group = new HashSet<Group>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
+        public int TeacherId { get; set; }
     
-        public virtual ICollection<Teacher> Teacher { get; set; }
+        public virtual Classroom Classroom { get; set; }
+        public virtual Day Day { get; set; }
+        public virtual Time Time { get; set; }
+        public virtual ICollection<Group> Group { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

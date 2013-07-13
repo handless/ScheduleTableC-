@@ -1,13 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ScheduleModelStoreContainer" CdmEntityContainer="ScheduleModelContainer">
-    <EntitySetMapping Name="Students">
-      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Student)">
-        <MappingFragment StoreEntitySet="Students">
+    <EntitySetMapping Name="Paras">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Para)">
+        <MappingFragment StoreEntitySet="Paras">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PrepodId" ColumnName="PrepodId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Auditorias">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Auditoria)">
+        <MappingFragment StoreEntitySet="Auditorias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Times">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Time)">
+        <MappingFragment StoreEntitySet="Times">
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -15,44 +27,76 @@
       <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Group)">
         <MappingFragment StoreEntitySet="Groups">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Subjects">
-      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Subject)">
-        <MappingFragment StoreEntitySet="Subjects">
+    <EntitySetMapping Name="Prepods">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Prepod)">
+        <MappingFragment StoreEntitySet="Prepods">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DayId" ColumnName="DayId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Teachers">
-      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Teacher)">
-        <MappingFragment StoreEntitySet="Teachers">
+    <EntitySetMapping Name="Dens">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Den)">
+        <MappingFragment StoreEntitySet="Dens">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Hours" ColumnName="Hours" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DaySet">
-      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Day)">
-        <MappingFragment StoreEntitySet="DaySet">
+    <EntitySetMapping Name="Predmets">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Predmet)">
+        <MappingFragment StoreEntitySet="Predmets">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DayName" ColumnName="DayName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="GroupSubject" TypeName="ScheduleModel.GroupSubject" StoreEntitySet="GroupSubject">
-      <EndProperty Name="Group">
-        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="IsTypeOf(ScheduleModel.Student)">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ParaAuditoria" TypeName="ScheduleModel.ParaAuditoria" StoreEntitySet="Paras">
+      <EndProperty Name="Auditoria">
+        <ScalarProperty Name="Id" ColumnName="Auditoria_Id" />
       </EndProperty>
-      <EndProperty Name="Subject">
-        <ScalarProperty Name="Id" ColumnName="Subject_Id" />
+      <EndProperty Name="Para">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ParaTime" TypeName="ScheduleModel.ParaTime" StoreEntitySet="Paras">
+      <EndProperty Name="Time">
+        <ScalarProperty Name="Id" ColumnName="Time_Id" />
+      </EndProperty>
+      <EndProperty Name="Para">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ParaGroup" TypeName="ScheduleModel.ParaGroup" StoreEntitySet="ParaGroup">
+      <EndProperty Name="Para">
+        <ScalarProperty Name="Id" ColumnName="Paras_Id" />
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Groups_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ParaDen" TypeName="ScheduleModel.ParaDen" StoreEntitySet="Paras">
+      <EndProperty Name="Den">
+        <ScalarProperty Name="Id" ColumnName="Den_Id" />
+      </EndProperty>
+      <EndProperty Name="Para">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PredmetPrepod" TypeName="ScheduleModel.PredmetPrepod" StoreEntitySet="PredmetPrepod">
+      <EndProperty Name="Predmet">
+        <ScalarProperty Name="Id" ColumnName="Predmets_Id" />
+      </EndProperty>
+      <EndProperty Name="Prepod">
+        <ScalarProperty Name="Id" ColumnName="Prepods_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
