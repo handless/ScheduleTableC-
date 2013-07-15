@@ -1,111 +1,7 @@
-﻿@{
-    ViewBag.Title = "GroupSchedule";
-}
-@Scripts.Render("~/scripts/jquery-1.7.1.js")
-@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
-
-<h2>GroupSchedule</h2>
-
-@*@using (Html.BeginForm()) {
-<fieldset>
-    <legend>Group</legend>
-    <select name="GroupSelected">
-        @{string GroupName = "";}
-        @for (int i = 0; i <= @ViewBag.Group.Count; i++)
-        {
-
-            GroupName = @ViewBag.Group.Dequeue().Name;
-            <option value="@GroupName">@GroupName</option>
-        }
-
-    </select>
-    <p>
-        <input type="submit" value="Create" />
-    </p>
-</fieldset>
-}*@
-
-@ViewBag.GroupSelected
+﻿<div id="searchresults">
 
 
-@*<div>
-    @using (Ajax.BeginForm("GroupScheduleAjax", new AjaxOptions { UpdateTargetId = "searchresults" }))
-    { 
-        *@<fieldset>
-    <legend>Group</legend>
-    <select name="GroupSelected" id="GroupSelected">
-        @{string GroupName = "";}
-        @for (int i = 0; i <= @ViewBag.Group.Count; i++)
-        {
-
-            GroupName = @ViewBag.Group.Dequeue().Name;
-            <option value="@GroupName">@GroupName</option>
-        }
-
-    </select>
-    <p>
-        <input type="submit" id="sumbit" value="Create" />
-    </p>
-</fieldset>@*
-    }
-
-    @Html.Partial("GroupScheduleAjax");
-</div>*@
-
-<div id="results"></div>
-<script type="text/javascript">
-    
-
-    $(document).ready(function () {
-        $('#sumbit').click(function (e) {
-            e.preventDefault();
-            var name = getSelectedValue();
-            $('#results').load("http://localhost:52623/Schedule/GroupScheduleAjax?groupName=" + name);
-        });
-
-    });
-
-
-
-    function getSelectedValue() {
-        var index = document.getElementById("GroupSelected").selectedIndex;
-        var text = document.getElementById("GroupSelected").options[index].text;
-        return text;
-    }
-</script>
-
-
-
-
-
-
-@* @for (int i = 0; i< 3; i++)
- {
-            <td>@ViewBag.Teachers.Dequeue().FirstName;</td>
-          <td>  @ViewBag.ClassRooms.Dequeue().Name;</td>
-          <td>  @ViewBag.SubjectNames.Dequeue();</td>
- }*@
- 
-@*<br>
- @ViewBag.Teachers.Dequeue().FirstName
- @ViewBag.ClassRooms.Dequeue().Name
- @ViewBag.SubjectNames.Dequeue()
-<br>
- @ViewBag.Teachers.Dequeue().FirstName
- @ViewBag.ClassRooms.Dequeue().Name
- @ViewBag.SubjectNames.Dequeue()
-
-<br>
- @ViewBag.Teachers.Dequeue().FirstName
- @ViewBag.ClassRooms.Dequeue().Name
- @ViewBag.SubjectNames.Dequeue()*@
-
-@*@foreach (var item in @ViewBag.test)
-{
-    @item.SubjectName
-}*@
-
-@*<div>
+<div>
 <table>
     <tr>
     <td>Понидельник</td>
@@ -122,7 +18,7 @@
                 Преподователь
             </td>
         </tr>
-        @{int HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @{int HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
         {
             <tr>
@@ -149,7 +45,7 @@
                 Преподователь
             </td>
         </tr>
-        @{HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @{HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
         {
             <tr>
@@ -182,7 +78,7 @@
                 Преподователь
             </td>
         </tr>
-        @{HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @{HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
         {
             <tr>
@@ -214,7 +110,7 @@
                 Преподователь
             </td>
         </tr>
-        @{HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @{HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
         {
             <tr>
@@ -247,7 +143,7 @@
                 Преподователь
             </td>
         </tr>
-        @{HowMuch = @ViewBag.HowMuchInOnDay.Dequeue();}
+        @{HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
         {
             <tr>
@@ -268,4 +164,7 @@
             
     </table>
 </div>
-*@
+
+
+
+    </div>

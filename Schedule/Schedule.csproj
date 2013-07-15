@@ -334,6 +334,7 @@
     <Content Include="Views\Admin\ClassRoomAdd.cshtml" />
     <Content Include="Views\Schedule\GroupSchedule.cshtml" />
     <Content Include="Views\Schedule\TeacherSchedule.cshtml" />
+    <Content Include="Views\Schedule\GroupScheduleAjax.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Roles\" />
