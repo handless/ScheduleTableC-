@@ -17,14 +17,19 @@
             <td>
                 Преподователь
             </td>
+            <td> Группа </td>
         </tr>
         @{int HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
         {
             <tr>
+                @if (@ViewBag.SubjectNames.Count > 0)
+                {
                 <td>@ViewBag.SubjectNames.Dequeue()</td>
             <td>@ViewBag.ClassRooms.Dequeue().Name</td>
             <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+             <td>@ViewBag.Group.Dequeue().Name</td>
+                }
             </tr>
             
         }
@@ -44,6 +49,7 @@
             <td>
                 Преподователь
             </td>
+            <td> Группа </td>
         </tr>
         @{HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
@@ -54,6 +60,7 @@
                     <td>@ViewBag.SubjectNames.Dequeue()</td>
             <td>@ViewBag.ClassRooms.Dequeue().Name</td>
             <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+                      <td>@ViewBag.Group.Dequeue().Name</td>
                     
                 }
             </tr>
@@ -77,6 +84,7 @@
             <td>
                 Преподователь
             </td>
+            <td> Группа </td>
         </tr>
         @{HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
@@ -87,6 +95,7 @@
                     <td>@ViewBag.SubjectNames.Dequeue()</td>
             <td>@ViewBag.ClassRooms.Dequeue().Name</td>
             <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+                    <td>@ViewBag.Group.Dequeue().Name</td>
                     
                 }
             </tr>
@@ -109,6 +118,7 @@
             <td>
                 Преподователь
             </td>
+            <td> Группа </td>
         </tr>
         @{HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
@@ -119,6 +129,7 @@
                     <td>@ViewBag.SubjectNames.Dequeue()</td>
             <td>@ViewBag.ClassRooms.Dequeue().Name</td>
             <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+                    <td>@ViewBag.Group.Dequeue().Name</td>
                     
                 }
                 
@@ -142,6 +153,7 @@
             <td>
                 Преподователь
             </td>
+            <td> Группа </td>
         </tr>
         @{HowMuch = @ViewBag.HowMuchInOneDay.Dequeue();}
         @for (int i = 0; i <= HowMuch; i++)
@@ -152,6 +164,7 @@
                     <td>@ViewBag.SubjectNames.Dequeue()</td>
             <td>@ViewBag.ClassRooms.Dequeue().Name</td>
             <td>@ViewBag.Teachers.Dequeue().FirstName</td>
+                      <td>@ViewBag.Group.Dequeue().Name</td>
                     
                 }
             </tr>

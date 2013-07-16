@@ -120,6 +120,7 @@ namespace Schedule.Controllers
             Queue<Classroom> classrooms = new Queue<Classroom>();
             Queue<string> subjectnames = new Queue<string>();
             Queue<int> HowMuchInOneDay = new Queue<int>();
+            Queue<Group> groups = new Queue<Group>();
             int howMuch = 0;
             for (int i = 1; i < 6; i++) // Проходим по всей недели
             {
@@ -135,9 +136,11 @@ namespace Schedule.Controllers
                         {
                             var teacher = container.TeacherSet.Where(q => q.Id == item.Teacher.Id).FirstOrDefault();
                             var classroom = container.ClassroomSet.Where(w => w.Id == item.Classroom.Id).FirstOrDefault();
+                            
                             teachers.Enqueue(teacher);
                             classrooms.Enqueue(classroom);
                             subjectnames.Enqueue(item.SubjectName);
+                            groups.Enqueue(item.Group.FirstOrDefault());
                             howMuch++;
                         }
                     }
@@ -151,6 +154,7 @@ namespace Schedule.Controllers
             HowMuchInOneDay.Enqueue(3);
             HowMuchInOneDay.Enqueue(3);
             HowMuchInOneDay.Enqueue(3);
+            ViewBag.Group = groups;
             ViewBag.HowMuchInOneDay = HowMuchInOneDay;
             ViewBag.Teachers = teachers;
             ViewBag.ClassRooms = classrooms;
